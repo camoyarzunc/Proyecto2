@@ -48,14 +48,13 @@ class Mascota(models.Model):
 
 
 class Registro(models.Model):
-    rut=models.CharField(max_length=12,primary_key=True,verbose_name="rut")
-    nombre=models.TextField(max_length=45)
-    apellido=models.TextField(max_length=45)
+    rut=models.CharField(max_length=40,primary_key=True)
+    nombre=models.CharField(max_length=45)
+    apellido=models.CharField(max_length=45)
     ciudad=models.ForeignKey(Ciudad,on_delete=models.CASCADE)
     region=models.ForeignKey(Region,on_delete=models.CASCADE)
     comuna=models.ForeignKey(Comuna,on_delete=models.CASCADE)
-    correo=models.TextField()
-    tipousuario=models.ForeignKey(TipoUsuario,on_delete=models.CASCADE)
+    correo=models.CharField(max_length=45)
 
     def __str__(self):
         return self.rut

@@ -14,20 +14,18 @@
                 <img src="../static/core/img/logo.png" alt="logo">
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
-                <a href="{% url 'page' %}" class="blanco">Inicio</a>
+                <a href="{% url 'index' %}" class="blanco">Inicio</a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
-                <a href="{% url 'page'%}" class="blanco">Quienes somos</a>
+                <a href="{% url 'index'%}" class="blanco">Quienes somos</a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
-                <a href="{% url 'page' %}" class="blanco">Servicios</a>
+                <a href="{% url 'index' %}" class="blanco">Servicios</a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
                 <a href="{% url 'formulario' %}" class="blanco">Contactanos</a>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
-                <a href="{% url 'listar2' %}" class="blanco">Listar Mascotas</a>
-            </div>
+           
         </div>
     </center>
 
@@ -36,43 +34,36 @@
             <tbody>
                 <tr>
                     <td colspan="2">
-                        <form class="well form-horizontal">
+                        <form class="well form-horizontal" method="POST">
                             <fieldset>
                                 <form method="POST">
+                                    {% csrf_token %}
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Rut</label>
                                         <div class="col-md-8 inputGroupContainer">
-                                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input
-                                                   " id="rut" name="rut" placeholder="Rut" class="form-control" required="true"
-                                                     type="text"></div>
+                                            <input type="text" id="rut" name="rut" placeholder="Rut" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Nombre</label>
                                         <div class="col-md-8 inputGroupContainer">
-                                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input
-                                                    id="Nombre" name="nombre" placeholder="Nombre" class="form-control"
-                                                    required="true"  type="text"></div>
+                                            <input type="text"  id="nombre" name="nombre" placeholder="Nombre" class="form-control" required >
                                         </div>
+                                    </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Apellido</label>
                                         <div class="col-md-8 inputGroupContainer">
-                                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input
-                                                    name="apellido" id ="apellido"placeholder="Apellido" class="form-control"
-                                                    required="true"  type="text"></div>
+                                            <input type="text" name="apellido" id ="apellido" placeholder="Apellido" class="form-control" required></div>
                                         </div>
                                     </div>
-                                  
-                                  
                                     <div class="form-group">
                                             <label class="col-md-4 control-label">Region</label>
                                             <div class="col-md-8 inputGroupContainer">
-                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                                <select class="selectpicker form-control" name="idregion" id="Region">
-                                                    <option>Seleccione</option>
+                                                <select class="selectpicker form-control" name="region" id="region">
+                                                    <option>Seleccionar</option>
                                                     {% for a in reg %}
-                                                        <option value="{{a.idregion}}">{{a.descripcion}}</option>
+                                                    <option value="{{a.idregion}}">{{a.descripcion}}</option>
                                                     {% endfor%}
                                                 </select>         
                                                 </div>
@@ -82,25 +73,22 @@
                                         <label class="col-md-4 control-label">Ciudad</label>
                                         <div class="col-md-8 inputGroupContainer">
                                             <div class="input-group">
-                                                <span class="input-group-addon" style="max-width: 100%;"><i class="glyphicon glyphicon-list"></i></span>
-                                                <select class="selectpicker form-control" name="idciudad" id="idciudad">
-                                                    <option>Seleccione</option>
+                                                <select class="selectpicker form-control" name="ciudad" id="ciudad">
+                                                    <option>Seleccionar</option>
                                                     {% for a in ciu %}
-                                                        <option value="{{a.idciudad}}">{{a.descripcion}}</option>
+                                                    <option value="{{a.idciudad}}">{{a.descripcion}}</option>
                                                     {% endfor %}
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                   
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Comuna</label>
                                         <div class="col-md-8 inputGroupContainer">
-                                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
-                                             <select class="selectpicker form-control"name="idcomuna" id="idcomuna">
-                                                <option>Seleccione</option>
+                                            <select class="selectpicker form-control"name="comuna" id="comuna">
+                                                <option>Seleccionar</option>
                                                 {% for a in com %}
-                                                    <option value="{{a.idcomuna}}">{{a.descripcion}}</option>
+                                                <option value="{{a.idcomuna}}">{{a.descripcion}}</option>
                                                 {% endfor %}
                                             </select>
                                             </div>
@@ -109,14 +97,11 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Correo</label>
                                         <div class="col-md-8 inputGroupContainer">
-                                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input
-                                                    id="correo" name="correo" placeholder="Correo" class="form-control"
-                                                    required="true"  type="email"></div>
+                                            <input type="text" id="correo" name="correo" placeholder="correo" class="form-control" required></div>
                                         </div>
                                     </div>
-                                   
-                                        <div class="form-group">
-                                            <input type="submit" value="Grabar" class="btn float-right login_btn">
+                                        <div class="form-group" method="POST">
+                                            <input type="submit" name="btnIngresar" value="Grabar" class="btn float-right login_btn">
                                         </div>
                                     </center>
                                 </form>
