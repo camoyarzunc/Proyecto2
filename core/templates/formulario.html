@@ -1,0 +1,127 @@
+<head>
+    <title>Mis perris</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link rel="icon" type="image/png" href="../static/core/img/patitas.jpg">
+    <link rel="stylesheet" type="text/css" media="screen" href="../static/core/css/formulario.css">
+</head>
+<div class="container">
+    <center>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                <img src="../static/core/img/logo.png" alt="logo">
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                <a href="{% url 'index' %}" class="blanco">Inicio</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                <a href="{% url 'index'%}" class="blanco">Quienes somos</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                <a href="{% url 'index' %}" class="blanco">Servicios</a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                <a href="{% url 'formulario' %}" class="blanco">Contactanos</a>
+            </div>
+        </div>
+    </center>
+
+    <center>
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="2">
+                        <form class="well form-horizontal">
+                            <fieldset>
+                                <form method="POST">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Rut</label>
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input
+                                                    id="Rut" name="Rut" placeholder="Rut" class="form-control" required="true"
+                                                    value="" type="text"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Nombre</label>
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input
+                                                    id="Nombre" name="Nombre" placeholder="Nombre" class="form-control"
+                                                    required="true" value="" type="text"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Apellido</label>
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span><input
+                                                    id="Apellido" name="Apellido" placeholder="Apellido" class="form-control"
+                                                    required="true" value="" type="text"></div>
+                                        </div>
+                                    </div>
+                                  
+                                  
+                                    <div class="form-group">
+                                            <label class="col-md-4 control-label">Region</label>
+                                            <div class="col-md-8 inputGroupContainer">
+                                                <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                                <select class="selectpicker form-control" name="idregion" id="idregion">
+                                                    <option>Seleccione</option>
+                                                    {% for a in reg %}
+                                                        <option value="{{a.idregion}}">{{a.descripcion}}</option>
+                                                    {% endfor%}
+                                                </select>         
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Ciudad</label>
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group">
+                                                <span class="input-group-addon" style="max-width: 100%;"><i class="glyphicon glyphicon-list"></i></span>
+                                                <select class="selectpicker form-control" name="idciudad" id="idciudad">
+                                                    <option>Seleccione</option>
+                                                    {% for a in ciu %}
+                                                        <option value="{{a.idciudad}}">{{a.descripcion}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Comuna</label>
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                                             <select class="selectpicker form-control"name="idcomuna" id="idcomuna">
+                                                <option>Seleccione</option>
+                                                {% for a in com %}
+                                                    <option value="{{a.idcomuna}}">{{a.descripcion}}</option>
+                                                {% endfor %}
+                                            </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Correo</label>
+                                        <div class="col-md-8 inputGroupContainer">
+                                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span><input
+                                                    id="Correo" name="Correo" placeholder="Correo" class="form-control"
+                                                    required="true" value="" type="email"></div>
+                                        </div>
+                                    </div>
+                                   
+                                        <div class="form-group">
+                                            <input type="submit" value="Grabar" class="btn float-right login_btn">
+                                        </div>
+                                    </center>
+                                </form>
+                            </fieldset>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+</div>

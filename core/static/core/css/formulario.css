@@ -1,0 +1,18 @@
+/*formulario*/
+.blanco{
+    color: white;
+}
+html,body{
+    background-image: url('../img/login.jpg');
+    background-size: cover;
+    font-family: 'Numans', sans-serif;
+}
+.login_btn{
+    color: black;
+    background-color: #FFC312;
+    width: 100px;
+}    
+.container{
+    height: 100%;
+    align-content: center;
+}

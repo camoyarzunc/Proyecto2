@@ -1,0 +1,10 @@
+ <select name="nombre">
+                            {% for a in mascotas %}
+                                {% if a.nombre == ma.nombre %}
+                                    <option selected>{{a.nombre}}</option>
+                                {% else %}
+                                    <option>{{a.nombre}}</option>
+                                {% endif %}
+                            {% endfor %}
+
+                        </select>
