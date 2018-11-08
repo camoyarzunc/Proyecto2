@@ -63,6 +63,7 @@
     </div>
     <br><br>
     <center>
+        
         <table class="table table-responsive table-striped">
 
             <thead>
@@ -84,8 +85,24 @@
                     <td>{{a.foto}}</td>
                 </tr>
                 {% endfor %}
+            
             </tbody>
+            <form method="POST">
+                    {% csrf_token %}
+            <select class="selectpicker form-control" name="filtro" id="filtro" >
+                    <option value="0">Seleccione</option>
+                    <option value="Adoptado">Adoptado</option>
+                    <option value="Rescatado">Rescatado</option>
+                    <option value="Disponible"> Disponible</option>
+
+
+
+                </select>   
+                <button type="submit" >Filtrar</button>
+            </form>
+
 
         </table>
+
     </center>
 </div>

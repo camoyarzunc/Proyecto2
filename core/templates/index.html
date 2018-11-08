@@ -32,39 +32,43 @@
                 </div>
             </center>
         </div>
-        <div>
-            <center>
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Iniciar sesion</h3>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
-                                </div>
-                                <input type="text" class="form-control" placeholder="usuario">
 
-                            </div>
-                            <div class="input-group form-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <center>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Iniciar sesion</h3>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="usuario" name="user" id="user">
+
                                 </div>
-                                <input type="password" class="form-control" placeholder="contraseña">
+                                <div class="input-group form-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                    </div>
+                                    <input type="password" name="password" id="password" class="form-control" placeholder="contraseña">
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Login" name="Login" class="btn float-right login_btn">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <div class="d-flex justify-content-center links">
+                                No tienes una cuenta?<a href="{% url 'reAdop' %}">Ingresa aqui</a>
                             </div>
-                            <div class="form-group">
-                                <input type="submit" value="Login" name="Login" class="btn float-right login_btn">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-center links">
-                            No tienes una cuenta?<a href="{% url 'reAdop' %}">Ingresa aqui</a>
                         </div>
                     </div>
-                </div>
-            </center>
-        </div>
+                </center>
+            </div>
     </div>
 </div>
+</form>

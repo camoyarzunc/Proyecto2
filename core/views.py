@@ -8,24 +8,23 @@ from django.contrib.auth.models import User
 
 def index(request):
     if request.POST:
-        accion = request.POST.get("Login", "")
-        if accion == "Login":
-            correo = request.POST.get("correo", "")
-            password=request.POST.get("pass","")
-            user=auth.authenticate(username=correo,password=password)
-            if user is not None and user.is_active:
-                auth.login(request,user)
-                na=request.user.is_staff
-                if na==True:
-                    return render(request ,'page2.html')
-                else:
-                    return render(request,'page.html')
+        user = request.POST.get("user", "")
+        password = request.POST.get("password", "")
+        user = auth.authenticate(username=user, password=password)
+        
+        if user is not None and user.is_active:
+            auth.login(request, user)
+            na = request.user.is_staff
+            if na == True:
+                return render(request, 'page2.html')
             else:
-                return render(request,'login.html')
+                return render(request, 'page.html')
+        else:
+            return render(request, 'index.html')
     else:
-        return render(request,'login.html')
+        return render(request, 'index.html') 
 
-    return render(request, 'index.html')
+    
 
 
 def formulario(request):
@@ -89,10 +88,24 @@ def mascota(request):
         return render(request, 'Mascota.html')
 
 
-def listar(request):
+def listarAdop(request):
     masc = Mascota.objects.all()
-    return render(request, 'listar.html', {'mascotas': masc})
+    if request.POST:
+        fil=request.POST.get("filtro")
 
+        if fil == "0":
+
+            return render(request, 'listarAdop.html', {'mascotas': masc})
+        else:
+
+            masco=Mascota.objects.filter(estado=fil)
+            print(fil)
+            return render(request, 'listarAdop.html', {'mascotas': masco})
+
+        
+    else:
+        return render(request, 'listarAdop.html', {'mascotas': masc})
+    
 
 def page2(request):
     return render(request, 'page2.html')
@@ -106,20 +119,21 @@ def modificar(request):
             ma = Mascota.objects.get(nombre=nom)
             return render(request, 'modificar.html',
             {'ma': ma})
-        if accion == "Modificar":
-            nom = request.POST.get("nombre", "")
-            ma = Mascota.objects.get(nombre=nom)
-            raza = request.POST.get("raza", "")
-            descripcion = request.POST.get("descripcion", "")
-            est = request.POST.get("estado", "")
+            if accion == "Modificar":
+                nom = request.POST.get("nombre", "")
+                ma = Mascota.objects.get(nombre=nom)
+                raza = request.POST.get("raza", "")
+                descripcion = request.POST.get("descripcion", "")
+                est = request.POST.get("estado", "")
 
-            ma.nombre = nom
-            ma.raza = raza
-            ma.descripcion = descripcion
-            ma.estado = est
-            ma.save()
-            return render(request, 'modificar.html',
-            {'ma': ma})
+                ma.nombre = nom
+                ma.raza = raza
+                ma.descripcion = descripcion
+                ma.estado = est
+                ma.save()
+                return render(request, 'modificar.html',
+                {'ma': ma})
+        else: return render(request,"modificar.html")
     else:
         return render(request, 'modificar.html')
 
@@ -157,9 +171,9 @@ def login(request):
                 else:
                     return render(request,'page.html')
             else:
-                return render(request,'login.html')
+                return render(request,'index.html')
     else:
-        return render(request,'login.html')
+        return render(request,'index.html')
 def registroAdministrador(request):
     if request.POST:
         nombre=request.POST.get("nombre","")
@@ -180,9 +194,9 @@ def registroAdministrador(request):
         if password == repassword:
             usu.is_staff=True
             usu.save()
-            return render(request,'login.html')
+            return render(request,'page2.html')
     else:
-        return render(request,'login.html')
+        return render(request,'AgregarAdm.html')
 def registroAdoptante(request):
     if request.POST:
         nombre=request.POST.get("nombre","")
@@ -207,6 +221,21 @@ def registroAdoptante(request):
     else:
         return render(request,'login.html')
     
-def listarAdop(request):
+def listar(request):
     masc = Mascota.objects.all()
-    return render(request, 'listarAdop.html', {'mascotas': masc})
+    if request.POST:
+        fil=request.POST.get("filtro")
+
+        if fil == "0":
+
+            return render(request, 'listar.html', {'mascotas': masc})
+        else:
+
+            masco=Mascota.objects.filter(estado=fil)
+            print(fil)
+            return render(request, 'listar.html', {'mascotas': masco})
+
+        
+    else:
+        return render(request, 'listar.html', {'mascotas': masc})
+    
