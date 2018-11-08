@@ -3,10 +3,10 @@ Proyecto mis perris
 Proyecto basado en la implementacion de una pagina web de adopcion de mascotas
 
 #Pre-requisitos
-Instalar Django
-Instalar Python
-Miniconda
-Tener la app visual code de preferencia
+Instalar Django,
+Instalar Python,
+Miniconda,
+Tener la app visual code de preferencia,
 Saber el manejo de django
 
 #Creacion
