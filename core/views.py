@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Region, Ciudad, Comuna, TipoUsuario, Estado, Mascota, Registro
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 # Create your views here.
 
 
@@ -17,9 +18,9 @@ def formulario(request):
         rut = request.POST.get("rut", "")
         nombre = request.POST.get("nombre", "")
         apellido = request.POST.get("apellido", "")
-        reg = request.POST.get("region", "")
-        ciu = request.POST.get("ciudad", "")
-        com = request.POST.get("comuna", "")
+        reg = request.POST.get("idregion", "")
+        ciu = request.POST.get("idciudad", "")
+        com = request.POST.get("idcomuna", "")
         correo = request.POST.get("correo", "")
         obj_region = Region.objects.get(name=reg)
         obj_ciudad = Ciudad.objects.get(name=ciu)
@@ -34,6 +35,7 @@ def formulario(request):
             correo=correo
 
         )
+        
         regis.save()
         return render(request, 'formulario.html', {'reg': regiones, 'ciu': ciudades, 'com': comunas, 'grabo': True})
     else:
@@ -120,9 +122,47 @@ def eliminar(request):
     else:
         return render(request,'eliminar.html')
 def login(request):
+    if request.POST:
+        accion=request.POST.get("btnAccion","")
+        if accion == "Ingresar":
+            correo=request.POST.get("correo","")
+            password=request.POST.get("pass","")
+            user=auth.authenticate(username=correo,password=password)
+            if user is not None and user.is_active:
+                auth.login(request,user)
+                na=request.user.is_staff
+                if na==True:
+                    return render(request ,'page2.html')
+                else:
+                    return render(request,'page.html')
     return render(request,'login.html')
 def registroAdoptante(request):
-    
-    return render(request)
+    if request.POST:
+        nombre=request.POST.get("nombre","")
+        apellido=request.POST.get("apellido","")
+        correo=request.POST.get("correo","")
+        password=request.POST.get("pass","")
+        respassword=request.POST.get("repass","")
+        usuario=request.POST.get("user","")
+
+        usu=User.objects.create_user(
+            first_name=nombre,
+            last_name=apellido,
+            username=usuario,
+            email=correo,
+            password=password
+        )
+
+        if password == repassword:
+            usu.is_staff=True
+            usu.save()
+            return render(request,'login.hmtl')
+    else:
+        return render(request,'login.html')
 def registroAdministrador(request):
 
+    return render(request,'login.html')
+def listarAdop(request):
+    masc = Mascota.objects.all()
+    return render(request, 'listarAdop.html', {'mascotas': masc})
+   
